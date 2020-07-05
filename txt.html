@@ -1,0 +1,18 @@
+1 import urllib.request
+ 2 import urllib.parse
+ 3 import json
+ 4 
+ 5 content=input("=====请输入您要翻译的内容：=====\n")
+ 6 
+ 7 url='http://fanyi.baidu.com/v2transapi'
+ 8 data={}
+ 9 data['from']='zh'
+10 data['to']='en'
+11 data['transtype']='translang'
+12 data['simple_means_flag']='3'
+13 data['query']=content
+14 data=urllib.parse.urlencode(data).encode('utf-8')
+15 response=urllib.request.urlopen(url,data)
+16 html=response.read().decode('utf-8')
+17 target=json.loads(html)
+18 print("翻译结果为：%s"%(target['trans_result']['data'][0]['dst']))
